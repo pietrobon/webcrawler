@@ -21,6 +21,7 @@ class Cralwer:
             input_element = currency_element.find('input', {'id': 'nacional'})
             if input_element:
                 value = input_element.get('value')
+                value = value.replace(',', '.')
                 self.dolar_data = {
                     'currency': 'Dólar Americano',
                     'value': value,
@@ -40,6 +41,7 @@ class Cralwer:
             input_element = currency_element.find('input', {'id': 'nacional'})
             if input_element:
                 value = input_element.get('value')
+                value = value.replace(',', '.')
                 self.euro_data = {
                     'currency': 'Euro',
                     'value': value,
