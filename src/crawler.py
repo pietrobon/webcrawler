@@ -32,13 +32,12 @@ class Crawler:
                     'cost': cost,
                     'time_of_extract': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 }
+                insert_dolar = self.db.insert(self.dolar_data)
+                print(f"ObjectId {insert_dolar}, inserted with success!")
             else:
                 print("Input element not found.")
         else:
             print("Currency element not found.")
-        
-        insert_dolar = self.db.insert(self.dolar_data)
-        print(insert_dolar)
 
     def extract_from_euro_hoje(self):
         raw_euro = self.request_data('https://dolarhoje.com/euro-hoje/')
@@ -57,13 +56,12 @@ class Crawler:
                     'cost': cost,
                     'time_of_extract': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 }
+                insert_euro = self.db.insert(self.euro_data)
+                print(f"ObjectId {insert_euro}, inserted with success!")
             else:
                 print("Input element not found.")
         else:
             print("Currency element not found.")
-        
-        insert_euro = self.db.insert(self.euro_data)
-        print(insert_euro)
 
 if __name__ == "__main__":
     crawler = Crawler()
