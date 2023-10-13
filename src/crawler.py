@@ -1,12 +1,14 @@
 import requests
 from bs4 import BeautifulSoup
 import datetime
+from database import Database
 
 class Crawler:
 
     def __init__(self):
         self.dolar_data = None
         self.euro_data = None
+        self.db = Database()
 
     def request_data(self, url: str):
         response = requests.get(url)
@@ -23,11 +25,11 @@ class Crawler:
             input_element = currency_element.find('input', {'id': 'nacional'})
             
             if input_element:
-                value = input_element.get('value')
-                value = value.replace(',', '.')
+                cost = input_element.get('value')
+                cost = cost.replace(',', '.')
                 self.dolar_data = {
                     'currency': 'Dólar Americano',
-                    'value': value,
+                    'cost': cost,
                     'time_of_extract': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 }
             else:
@@ -35,7 +37,8 @@ class Crawler:
         else:
             print("Currency element not found.")
         
-        print(self.dolar_data)
+        insert_dolar = self.db.insert(self.dolar_data)
+        print(insert_dolar)
 
     def extract_from_euro_hoje(self):
         raw_euro = self.request_data('https://dolarhoje.com/euro-hoje/')
@@ -47,11 +50,11 @@ class Crawler:
             input_element = currency_element.find('input', {'id': 'nacional'})
             
             if input_element:
-                value = input_element.get('value')
-                value = value.replace(',', '.')
+                cost = input_element.get('value')
+                cost = cost.replace(',', '.')
                 self.euro_data = {
                     'currency': 'Euro',
-                    'value': value,
+                    'cost': cost,
                     'time_of_extract': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 }
             else:
@@ -59,7 +62,8 @@ class Crawler:
         else:
             print("Currency element not found.")
         
-        print(self.euro_data)
+        insert_euro = self.db.insert(self.euro_data)
+        print(insert_euro)
 
 if __name__ == "__main__":
     crawler = Crawler()
