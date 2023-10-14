@@ -95,7 +95,7 @@ if __name__ == "__main__":
     db = Database()
     data = {'currency': 'Dólar Americano', 'cost': '5.14', 'time_of_extract': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
     inserted_data = db.insert(data)
-    print(inserted_data)
+    print(f"ObjectId: {inserted_data}, inserted with success!")
     currency_query = {'currency': 'Dólar Americano'}
     result = db.find_most_recent(currency_query)
-    print(result)
+    print(f"This is the most recent document: {result}")
