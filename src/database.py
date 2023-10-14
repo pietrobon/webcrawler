@@ -77,6 +77,10 @@ class Database:
         """
         try:
             result = self.cotacao.find_one(query, sort=[('time_of_extract', -1)])
+            
+            if result is None:
+                print("Your query did not return any documents.")
+
             return result
         except PyMongoError as e:
             raise DatabaseQueryError(f"Failed to retrieve the most recent data from the database: {e}")
