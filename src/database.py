@@ -1,4 +1,5 @@
 import os
+import datetime
 from pymongo import MongoClient
 from pymongo.errors import PyMongoError, WriteError, WriteConcernError
 from dotenv import load_dotenv
@@ -92,5 +93,9 @@ class DatabaseConnectionError(Exception):
 
 if __name__ == "__main__":
     db = Database()
-    data = {'currency': 'Dólar Americano', 'cost': '5.14', 'time_of_extract': '2023-10-07 15:50:59'}
-    db.insert(data)
+    data = {'currency': 'Dólar Americano', 'cost': '5.14', 'time_of_extract': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+    inserted_data = db.insert(data)
+    print(inserted_data)
+    currency_query = {'currency': 'Dólar Americano'}
+    result = db.find_most_recent(currency_query)
+    print(result)
