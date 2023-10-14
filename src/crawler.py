@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import datetime
 from database import Database
+from bot import BOT
 
 class Crawler:
 
@@ -9,6 +10,7 @@ class Crawler:
         self.dolar_data = None
         self.euro_data = None
         self.db = Database()
+        self.bot = BOT()
 
     def request_data(self, url: str):
         response = requests.get(url)
@@ -34,6 +36,8 @@ class Crawler:
                 }
                 insert_dolar = self.db.insert(self.dolar_data)
                 print(f"ObjectId {insert_dolar}, inserted with success!")
+                if insert_dolar is not None:
+                    self.bot.post(self.dolar_data)
             else:
                 print("Input element not found.")
         else:
@@ -58,6 +62,8 @@ class Crawler:
                 }
                 insert_euro = self.db.insert(self.euro_data)
                 print(f"ObjectId {insert_euro}, inserted with success!")
+                if insert_euro is not None:
+                    self.bot.post(self.euro_data)
             else:
                 print("Input element not found.")
         else:
