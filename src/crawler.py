@@ -37,7 +37,8 @@ class Crawler:
                 insert_dolar = self.db.insert(self.dolar_data)
                 print(f"ObjectId {insert_dolar}, inserted with success!")
                 if insert_dolar is not None:
-                    self.bot.post(self.dolar_data)
+                    post = self.bot.post(self.dolar_data)
+                    print(f"Check your post content at: https://twitter.com/user/status/{post}")
             else:
                 print("Input element not found.")
         else:
@@ -63,7 +64,8 @@ class Crawler:
                 insert_euro = self.db.insert(self.euro_data)
                 print(f"ObjectId {insert_euro}, inserted with success!")
                 if insert_euro is not None:
-                    self.bot.post(self.euro_data)
+                    post = self.bot.post(self.euro_data)
+                    print(f"Check your post content at: https://twitter.com/user/status/{post}")
             else:
                 print("Input element not found.")
         else:

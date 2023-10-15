@@ -37,7 +37,7 @@ class BOT:
                 data["currency"],
                 data["cost"].replace('.', ',')
             )
-            self.client.create_tweet(text=post)
-            return True
+            tweet = self.client.create_tweet(text=post)
+            return tweet.data['id']
         except Exception as e:
             print(f"Failed to post: {e}")
