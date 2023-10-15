@@ -46,7 +46,16 @@ pip install -r requirements.txt
 
 Isso instalará todas as bibliotecas necessárias listadas no `requirements.txt`.
 
-### 4. Executar o Projeto
+### 4. Testar função database
+
+É possível realizar um teste antes de partir para execução do `crawler.py`, a função `database.py` pode ser executada a partir de:
+
+```bash
+python3 src/database.py
+```
+A função contém um exemplo de insert e de query de retorno e se seu .env estiver com todas as configurações necessárias, será executada com sucesso.
+
+### 5. Executar o Projeto
 
 Você pode executar o projeto executando o arquivo `crawler.py`. Certifique-se de que você está no diretório raiz do projeto:
 
@@ -54,10 +63,8 @@ Você pode executar o projeto executando o arquivo `crawler.py`. Certifique-se d
 python3 src/crawler.py
 ```
 
-Isso executará o script `crawler.py` que faz as solicitações da web e extrai os dados.
+Isso executará o script `crawler.py` que faz as solicitações da web, extrai os dados, grava no mongodb e também realiza um post no twitter(X).
 
-### 5. Verificar os Resultados
+### 6. Verificar os Resultados
 
-O script provavelmente imprimirá os resultados no console. Certifique-se de verificar a saída para ver os dados coletados.
-
-Isso deve permitir que você execute o seu projeto. Lembre-se de personalizar o código de acordo com as suas necessidades específicas.
+Se executado com sucesso o script irá retornar uma mensagem de sucesso do insert no mongo com o ID do objeto inserido e também o link com o post do twitter.
